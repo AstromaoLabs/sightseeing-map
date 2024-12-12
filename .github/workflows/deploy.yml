@@ -1,0 +1,30 @@
+name: Deploy Sightseeing Map App
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy on Server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd ~/sightseeing_map
+            
+            # Pull latest changes
+            git pull origin main
+
+            # Reminder: Update this line to include Scripts workflow when added
+
+            # Run deployment scripts: when available
+            echo "Rebuilding Docker containers and collecting static files..."
+            ./scripts/deploy.sh
