@@ -30,7 +30,7 @@ const locations = [
   },
 ];
 
-function App() {
+function UserMap() {
   const [latitude, setLatitude]=useState(null);
   const [longitude, setLongitude]=useState(null);
   const[api,setApi] = useState(null);
@@ -93,5 +93,5 @@ function App() {
 }
 
 
-export default App;
+export default UserMap;
  

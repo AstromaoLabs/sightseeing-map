@@ -25,4 +25,60 @@
   height: 100%;
 }
 
+.logo{
+  grid-area: logo;
+  width:50px;
+  height:50px;
+}
+
+.user{
+  grid-area: signin;
+  display:flex;
+  position: relative;
+  justify-content: right;
+  top:10px;
+}
+
+.user button{ 
+  margin-right: 10px;
+  border-radius: 10%;
+  border: 2px solid orange;
+  width:70px;
+  height:30px;
+  color: #fff;
+  background-color: orange;
+ 
+
+}
+
+.header{
+  display:grid;
+  grid-template-columns: 100px minmax(250px auto) auto;
+  grid-template-areas: "logo searchbar signin";
+}
+
+.search-bar{
+  width:250px;
+  height:25px;
+  border: 1px solid #333;
+  border-radius: 10px;
+}
+
+.search{
+grid-area: searchbar;
+margin-top: 10px;
+}
+
+.search button{
+  color: #fff;
+  background-color: orange;
+  width:60px;
+  height:30px;
+  border-radius: 10px;
+}
+
+
+
+
+
 
