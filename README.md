@@ -1,31 +1,31 @@
-# Sightseeing Map
+# **Sightseeing Map**
 
-## Overview
-This project is a collaborative Django + React application designed to help users explore and review local sightseeing spots. The app integrates geolocation to pinpoint the user's current location, displays nearby places of interest, and provides detailed information such as ratings, reviews, opening hours, and pictures. Users can filter spots based on proximity and categories, making it a convenient tool for discovering restaurants, cafes, and attractions around.
+## **Overview**
+This project is a collaborative Django + React application designed to help users explore and review local sightseeing spots. The app integrates geolocation to pinpoint the user's current location, displays nearby places of interest, and provides detailed information such as ratings, reviews, opening hours, and pictures. Users can filter spots based on proximity and categories, making it a convenient tool for discovering restaurants, cafes, and attractions nearby.
 
 ---
 
-## Features
+## **Features**
 
-### **First Function: Geolocation**
+### **Geolocation**
 - Automatically detects the user's location using the browser's **Geolocation API**.
 - Displays the user's position as a pin on an interactive map.
 
-### **Second Function: Spot Visualization**
+### **Spot Visualization**
 - Plots nearby places (e.g., restaurants, sightseeing spots, cafes) on the map using styled markers.
-- Incorporates circled markers for a visually appealing design.
+- Provides visually appealing marker designs, including circled pins.
 
-### **Third Function: Filtering and Listing**
-- Fetches place data from a backend API and filters results:
+### **Filtering and Listing**
+- Fetches place data from the backend API and applies filters:
   - By proximity (e.g., within 30 minutes by foot).
   - By category (e.g., restaurants, activities).
 - Displays a scrollable list with details:
   - Name
   - Image
   - Distance
-  - Evaluation stars.
+  - Rating stars.
 
-### **Fourth Function: Spot Details**
+### **Spot Details**
 - Clicking on a marker opens a detailed view of the selected spot.
 - Displays:
   - Name of the place.
@@ -33,38 +33,39 @@ This project is a collaborative Django + React application designed to help user
   - Opening hours.
   - Pictures and additional details.
 
-### **Fifth Function: User Reviews**
+### **User Reviews**
 - Enables users to submit reviews through a simple form.
-- Stores reviews in the database via a backend API.
+- Stores reviews in the database via the backend API.
 
-### **Sixth Function: Mobile-Friendly UI**
+### **Mobile-Friendly UI**
 - Fully responsive design for mobile and desktop users.
 - Displays error messages when geolocation fails or data cannot be fetched.
 
 ---
 
-## Future Enhancements
-- Improve UI/UX for enhanced interactivity.
+## **Future Enhancements**
+- Advanced search features (e.g., filters by specific amenities).
+- Support for multiple languages.
+- Enhanced map interactivity (e.g., draggable markers, dynamic routes).
 
 ---
 
-## Technology Stack
+## **Technology Stack**
 - **Backend**: Django with Django REST Framework (DRF)
   - Handles API endpoints for location data, filtering, and spot details.
 - **Frontend**: React
-  - Displays maps and spot details.
-  - Handles filtering and user interactions.
+  - Displays maps, handles filtering, and manages user interactions.
+  - Integrated with backend APIs.
 
 ---
 
-## Setup and Installation
+## **Setup and Installation**
 
-### Prerequisites
+### **Prerequisites**
 - Python 3.8+
 - Node.js 16+
 
-### Backend Setup
-
+### **Backend Setup**
 1. **Navigate to the `backend/` Directory**:
    ```bash
    cd backend/
@@ -82,8 +83,10 @@ This project is a collaborative Django + React application designed to help user
    - Add the following content:
      ```plaintext
      DJANGO_SECRET_KEY=your-secret-key
+     GOOGLE_PLACES_API_KEY=your-google-api-key
      ```
-   - Replace `your-secret-key` with the secure `SECRET_KEY` shared by the team or generated using Django's `get_random_secret_key()` utility.
+   - Replace `your-secret-key` with a secure Django `SECRET_KEY`.
+   - Replace `your-google-api-key` with the key from Google Cloud Console.
 
 4. **Set Up the Database**:
    ```bash
@@ -96,39 +99,49 @@ This project is a collaborative Django + React application designed to help user
    python manage.py runserver
    ```
 
-### Frontend Setup
-1. Navigate to the `frontend/` directory:
+### **Frontend Setup**
+1. **Navigate to the `frontend/` Directory**:
    ```bash
    cd frontend/
    ```
 
-### Notes:
-- **Environment Variables**:
-  - The `.env` file is included in `.gitignore` to prevent sensitive information from being exposed.
-  - Ensure all sensitive variables (e.g., API keys) are stored securely.
+2. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
 
-- **Verify Installation**:
-  - If the server runs without issues, your environment is correctly configured.
-
----
-
-## Deployment
-### Staging
-The app will be deployed for testing and development purposes.
-
-### Production
-(Not yet available at this stage.)
+3. **Start the Frontend Development Server**:
+   ```bash
+   npm start
+   ```
 
 ---
 
-## Collaborators
+## **Development Workflow**
+To ensure a smooth and collaborative workflow, follow the guidelines in our [CONTRIBUTING.md](CONTRIBUTING.md) file.  
+
+Key highlights:
+- Work on feature branches.
+- Use descriptive commit messages and link issues to pull requests.
+- Test your changes thoroughly before submitting a pull request.
+
+---
+
+## **Collaborators**
 
 - **Frontend Developer**: [Soki Iwae](https://github.com/Sochan2)
-  - Main responsibilities: Designing and implementing the user interface using React and TailwindCSS, and integrating APIs such as geolocation and backend endpoints built with Django.
+  - Main responsibilities: Designing and implementing the user interface with React, TailwindCSS, and API integration.
 - **Backend/DevOps Developer**: [Anthony Em](https://github.com/AnSiChen)
-  - Main responsibilities: Implementing and engineering backend functionality with Django, Dockerized deployment, and setting up CI/CD workflows.
+  - Main responsibilities: Backend functionality using Django, setting up Google Places API, and managing deployments.
 
 ---
 
-## License
-This project is not currently licensed. For inquiries about usage or contributions, please contact us.
+## **License**
+This project is currently not licensed. For inquiries about usage or contributions, please contact us.
+
+---
+
+### **Notes**
+- Ensure sensitive data (e.g., API keys) is never committed to the repository.  
+- For further guidance on contribution and workflow, see the [CONTRIBUTING.md](CONTRIBUTING.md) file.  
+- If you encounter issues, feel free to raise them on the [Issues page](https://github.com/AstromaoLabs/sightseeing-map/issues).
