@@ -19,15 +19,7 @@ Thank you for considering contributing to this project! Please follow these guid
      pip install -r backend/requirements.txt  # For backend
      ```
 
-3. **Create a new branch for your work**:
-   - Use the following naming format:
-     ```bash
-     git checkout -b issue-#<issue-number>-<short-description>
-     ```
-     Example:
-     ```bash
-     git checkout -b issue-#5-add-login-page
-     ```
+3. **Follow the workflow in the section below**:
 
 ---
 
@@ -37,7 +29,17 @@ Thank you for considering contributing to this project! Please follow these guid
    - Browse the [GitHub Issues](https://github.com/AstromaoLabs/sightseeing-map/issues) for tasks.
    - Comment on the issue to indicate you're working on it.
 
-2. **Work on your branch**:
+2. **Create a new branch for your work**:
+   - Use the following naming format:
+     ```bash
+     git checkout -b issue-#<issue-number>-<short-description>
+     ```
+     Example:
+     ```bash
+     git checkout -b issue-#5-add-login-page
+     ```
+     
+3. **Work on your branch**:
    - Implement your changes.
    - Make small, meaningful commits:
      ```bash
