@@ -6,9 +6,7 @@
     "@react-google-maps/api": "^2.20.3",
     "@svgr/webpack": "^8.1.0",
     "@vis.gl/react-google-maps": "^1.4.2",
-    "cra-template": "1.2.0",
     "dotenv": "^16.4.7",
-    "nth-check": "^2.1.1",
     "postcss": "^8.4.49",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -41,12 +39,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-transform-optional-chaining": "^7.25.9",
-    "@babel/plugin-transform-private-methods": "^7.25.9",
-    "@eslint/config-array": "^0.19.1",
-    "@eslint/object-schema": "^2.1.5",
     "@jridgewell/sourcemap-codec": "^1.5.0",
-    "@rollup/plugin-terser": "^0.4.4",
     "eslint": "^8.57.1",
     "rimraf": "^6.0.1"
   }
