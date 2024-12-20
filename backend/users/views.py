@@ -69,6 +69,7 @@ class LogoutAPI(APIView):
         except Exception:
             return Response({"message": "Logout failed"}, status=status.HTTP_400_BAD_REQUEST)
         
+
 # Password Reset Request API
 class PasswordResetRequestAPI(APIView):
     '''
@@ -82,6 +83,7 @@ class PasswordResetRequestAPI(APIView):
             serializer.save()
             return Response({"message": "If the email exists, a password link will be send to the email provided."}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 # Password Reset API Confirmation 
 class PasswordResetConfirmAPI(APIView):
