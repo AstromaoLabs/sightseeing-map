@@ -4,7 +4,8 @@ from rest_framework.views import APIView
 from .serializers import RegisterSerializer, LoginSerializer, UserSerializer, PasswordResetSerializer, PasswordResetConfirmSerializer
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.views import TokenRefreshView
-
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.exceptions import TokenError
 
 # Register API
 class RegisterAPI(generics.CreateAPIView):
@@ -37,8 +38,38 @@ class UserAPI(generics.RetrieveAPIView):
 
     def get_object(self):
         return self.request.user
-    
-# Forgot Password API
+
+# Logout API
+class LogoutAPI(APIView):
+    '''
+    Logout a user by blacklisting the refresh token
+    This endpoint includes a simple error logging mechanism to log token-related errors 
+    For debugging purposes and can be removed or kept as needed
+    '''
+    permission_classes = [permissions.IsAuthenticated] # Only authenticated users can logout
+
+    def post(self, request):
+        try:
+            # Extract the refresh token from the request
+            refresh_token = request.data.get("refresh")
+            if not refresh_token:
+                return Response({"error": "Refresh token is required"}, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Blacklist the token
+            token = RefreshToken(refresh_token) 
+            token.blacklist()
+
+            # 205: Reset Content status code -> a request has been successfully processed and the client should reset the document view
+            return Response({"message": "Successfully logged out"}, status=status.HTTP_205_RESET_CONTENT)
+        except TokenError as e:
+            # Log errors for debugging
+            if "Token is blacklisted" in str(e):
+                print(f"Attempted reused of blacklisted token: {refresh_token}")
+            return Response({"message": "Logout failed"}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception:
+            return Response({"message": "Logout failed"}, status=status.HTTP_400_BAD_REQUEST)
+        
+# Password Reset Request API
 class PasswordResetRequestAPI(APIView):
     '''
     Forgot password API Request
@@ -52,7 +83,6 @@ class PasswordResetRequestAPI(APIView):
             return Response({"message": "If the email exists, a password link will be send to the email provided."}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 # Password Reset API Confirmation 
 class PasswordResetConfirmAPI(APIView):
     '''
@@ -65,4 +95,3 @@ class PasswordResetConfirmAPI(APIView):
             serializer.save()
             return Response({"message": "Password has been reset succesfully."}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    

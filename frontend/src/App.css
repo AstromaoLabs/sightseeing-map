@@ -1,8 +1,4 @@
-.App {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;  
-}
+
 
 
 .map{
@@ -37,6 +33,7 @@
   position: relative;
   justify-content: right;
   top:10px;
+  gap:2%;
 }
 
 .user button{ 
@@ -51,22 +48,28 @@
 
 }
 
+/*Header style*/
+
 .header{
   display:grid;
-  grid-template-columns: 100px minmax(250px auto) auto;
+  grid-template-columns: 70px minmax(300px, 1fr) 260px;
   grid-template-areas: "logo searchbar signin";
 }
 
 .search-bar{
-  width:250px;
+  max-width:250px;
   height:25px;
   border: 1px solid #333;
   border-radius: 10px;
+  width:100%;
 }
 
 .search{
+display: flex;
 grid-area: searchbar;
 margin-top: 10px;
+width:100%;
+justify-content: center;
 }
 
 .search button{
@@ -78,7 +81,113 @@ margin-top: 10px;
 }
 
 
+/* Entire footer style */
+.footer {
+  background-color: #fff;
+  color: #FF8C00;
+  padding: 40px 0;
+  font-family: Arial, sans-serif;
+  text-align: left;
+}
 
 
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(6,1fr);  
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
 
 
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-column h4 {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #FF8C00;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column ul li a {
+  color: #333;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.footer-column ul li a:hover {
+  text-decoration: underline;
+}
+
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icons a {
+  color: #333;
+  text-decoration: none;
+}
+
+.social-icons img {
+  width: 25px;
+  height: 25px;
+  transition: transform 0.3s ease;
+}
+
+.social-icons img:hover {
+  transform: scale(1.2);
+}
+
+footer select {
+  padding: 5px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  font-size: 1rem;
+}
+
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.footer-bottom p {
+  margin: 0;
+}
+
+
+@media screen and (max-width: 1024px) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr 1fr; 
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr;  
+  
+  }
+  .footer-column{
+    justify-content: center;
+    align-items: center;
+  }
+  footer select {
+    width: 100%; 
+  }
+}
