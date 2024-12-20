@@ -4,7 +4,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth.tokens import default_token_generator # Token generator for password reset
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode # Encode and decode uid
 from django.utils.encoding import force_bytes 
-from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.conf import settings 
 
@@ -69,7 +69,6 @@ class PasswordResetSerializer(serializers.Serializer):
         token = default_token_generator.make_token(user)
         uid = urlsafe_base64_encode(force_bytes(user.pk))
 
-        # NOTE: replace settings.FRONTEND_URL with the actual frontend URL if needed. Not sure yet actually...
         reset_link = f"{settings.FRONTEND_URL}/reset-password/{uid}/{token}"
 
         email_subject = "Password Reset Request"
@@ -78,13 +77,15 @@ class PasswordResetSerializer(serializers.Serializer):
             'user': user,
         })
 
-        send_mail(
+        # Using EmailMultiAlternatives to send HTML email
+        email = EmailMultiAlternatives(
             subject=email_subject,
-            message=email_body,
+            body=email_body,
             from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[user.email],
-            fail_silently=False, # Raise exception if email fails
+            to=[user.email],
         )
+        email.attach_alternative(email_body, "text/html")
+        email.send(fail_silently=False)
 
 # Confirm Password Reset Serializer
 class PasswordResetConfirmSerializer(serializers.Serializer):
