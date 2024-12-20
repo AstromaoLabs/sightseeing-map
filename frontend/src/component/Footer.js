@@ -8,14 +8,14 @@ export default function Footer(){
           <h4>About Us</h4>
           <ul>
             <li><a href="#">About the App</a></li>
-            <li><a href="#">Our Team</a></li>
+            <li><a href="#">Our Teams</a></li>
           </ul>
         </div>
 
         <div className="footer-column">
           <h4>Contact Information</h4>
           <ul>
-            <li><a href="mailto:contact@example.com">contact@example.com</a></li>
+            <li><a href="">contact@example.com</a></li>
           </ul>
         </div>
 
