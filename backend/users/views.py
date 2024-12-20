@@ -43,6 +43,8 @@ class UserAPI(generics.RetrieveAPIView):
 class LogoutAPI(APIView):
     '''
     Logout a user by blacklisting the refresh token
+    This endpoint includes a simple error logging mechanism to log token-related errors 
+    For debugging purposes and can be removed or kept as needed
     '''
     permission_classes = [permissions.IsAuthenticated] # Only authenticated users can logout
 
@@ -60,7 +62,6 @@ class LogoutAPI(APIView):
             # 205: Reset Content status code -> a request has been successfully processed and the client should reset the document view
             return Response({"message": "Successfully logged out"}, status=status.HTTP_205_RESET_CONTENT)
         except TokenError as e:
-            # Token-related errors for logging (not shown to users)
             # Log errors for debugging
             if "Token is blacklisted" in str(e):
                 print(f"Attempted reused of blacklisted token: {refresh_token}")
