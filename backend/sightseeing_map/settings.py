@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from decouple import Config, Csv, RepositoryEnv
 from datetime import timedelta # This is for the JWT token expiration time
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'sightseeing_map.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -147,3 +148,16 @@ SIMPLE_JWT = {
     "SIGNING_KEY": SECRET_KEY,
     "ALGORITHM": "HS256", 
 }
+
+# Email settings
+EMAIL_BACKEND = config('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
+EMAIL_HOST = config('DJANGO_EMAIL_HOST', default='localhost')
+EMAIL_PORT = config('DJANGO_EMAIL_PORT', default=587, cast=int)
+EMAIL_USE_TLS = config('DJANGO_EMAIL_USE_TLS', default=True, cast=bool)
+EMAIL_USE_SSL = config('DJANGO_EMAIL_USE_SSL', default=False, cast=bool)
+EMAIL_HOST_USER = config('DJANGO_EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = config('DJANGO_EMAIL_HOST_PASSWORD', default='')
+DEFAULT_FROM_EMAIL = config('DJANGO_DEFAULT_FROM_EMAIL', default='webmaster@localhost')
+
+# Frontend URL
+FRONTEND_URL = config('FRONTEND_URL', default='http://localhost:3000')
