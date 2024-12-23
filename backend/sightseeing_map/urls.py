@@ -37,6 +37,7 @@ schema_view = get_schema_view(
 # URL patterns
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('sightseeing/v1/', include('api_keys.urls')), # Include the api_keys app
     path('sightseeing/v1/', include('users.urls')), # Include the users app
 
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'), # Keep This Three
