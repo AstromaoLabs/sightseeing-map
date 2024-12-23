@@ -67,7 +67,7 @@ Use Postman to obtain the admin token:
 
 **Request**:
 - **Method**: `POST`
-- **URL**: `http://127.0.0.1:8000/api/v1/users/login/`
+- **URL**: `http://127.0.0.1:8000/sightseeing/v1/users/login/`
 - **Headers**:
   ```
   Content-Type: application/json
@@ -110,7 +110,7 @@ Use the admin access token to create an API key for the React app.
 
 **Request**:
 - **Method**: `POST`
-- **URL**: `http://127.0.0.1:8000/api/v1/keys/create/`
+- **URL**: `http://127.0.0.1:8000/sightseeing/v1/keys/create/`
 - **Headers**:
   ```
   Authorization: Bearer admin_access_token_here
@@ -153,7 +153,7 @@ For all requests, include:
 ##### **1. Create a New User (Register)**
 **Request**:
 - **Method**: `POST`
-- **URL**: `http://127.0.0.1:8000/api/v1/users/register/`
+- **URL**: `http://127.0.0.1:8000/sightseeing/v1/users/register/`
 - **Headers**:
   ```
   X-API-KEY: your_generated_api_key
@@ -182,7 +182,7 @@ For all requests, include:
 ##### **2. Log In a User**
 **Request**:
 - **Method**: `POST`
-- **URL**: `http://127.0.0.1:8000/api/v1/users/login/`
+- **URL**: `http://127.0.0.1:8000/sightseeing/v1/users/login/`
 - **Headers**:
   ```
   X-API-KEY: your_generated_api_key
@@ -212,7 +212,7 @@ For all requests, include:
 ##### **3. Get User Details**
 **Request**:
 - **Method**: `GET`
-- **URL**: `http://127.0.0.1:8000/api/v1/users/me/`
+- **URL**: `http://127.0.0.1:8000/sightseeing/v1/users/me/`
 - **Headers**:
   ```
   X-API-KEY: your_generated_api_key
@@ -233,7 +233,7 @@ For all requests, include:
 ##### **4. Log Out a User**
 **Request**:
 - **Method**: `POST`
-- **URL**: `http://127.0.0.1:8000/api/v1/users/logout/`
+- **URL**: `http://127.0.0.1:8000/sightseeing/v1/users/logout/`
 - **Headers**:
   ```
   X-API-KEY: your_generated_api_key
