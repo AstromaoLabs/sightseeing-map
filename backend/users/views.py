@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
+from api_keys.permissions import HasValidAPIKey
 
 # Register API
 class RegisterAPI(generics.CreateAPIView):
@@ -13,14 +14,17 @@ class RegisterAPI(generics.CreateAPIView):
     Register a new user
     '''
     serializer_class = RegisterSerializer
-    permission_classes = [permissions.AllowAny] # Allow any user to register
+    permission_classes = [HasValidAPIKey] 
 
 # Login API
 class LoginAPI(APIView):
     '''
     Login a user
     '''
-    permission_classes = [permissions.AllowAny] # Allow any user to login
+    # Temporarily allow access without API key to get the token
+    # permission_classes = [permissions.AllowAny] # Uncomment this line to allow access without API key
+    permission_classes = [HasValidAPIKey] # Allow any user to login, # Uncomment this line to bring back security 
+    
 
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
@@ -33,7 +37,7 @@ class UserAPI(generics.RetrieveAPIView):
     '''
     Get a user
     '''
-    permission_classes = [permissions.IsAuthenticated] # Only authenticated users can get a user
+    permission_classes = [HasValidAPIKey, permissions.IsAuthenticated] # Only authenticated users can get a user
     serializer_class = UserSerializer
 
     def get_object(self):
@@ -46,7 +50,7 @@ class LogoutAPI(APIView):
     This endpoint includes a simple error logging mechanism to log token-related errors 
     For debugging purposes and can be removed or kept as needed
     '''
-    permission_classes = [permissions.IsAuthenticated] # Only authenticated users can logout
+    permission_classes = [HasValidAPIKey, permissions.IsAuthenticated] # Only authenticated users can logout
 
     def post(self, request):
         try:
@@ -75,7 +79,7 @@ class PasswordResetRequestAPI(APIView):
     '''
     Forgot password API Request
     '''
-    permission_classes = [permissions.AllowAny] # Allow any user to request a password reset    
+    permission_classes = [HasValidAPIKey, permissions.AllowAny] # Allow any user to request a password reset    
     
     def post(self, request):
         serializer = PasswordResetSerializer(data=request.data)
@@ -90,6 +94,7 @@ class PasswordResetConfirmAPI(APIView):
     '''
     Password Reset Confirmation API
     '''
+    permission_classes = [HasValidAPIKey]
     
     def post(self, request):
         serializer = PasswordResetConfirmSerializer(data=request.data)

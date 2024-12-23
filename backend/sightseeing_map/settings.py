@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'users',
     'drf_yasg',
     'rest_framework_simplejwt.token_blacklist', # Invalidates tokens (e.g., after logout)
+    'api_keys',
 ]
 
 CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000', cast=Csv())
