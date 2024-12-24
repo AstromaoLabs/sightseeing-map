@@ -21,7 +21,7 @@ services:
     ports:
       - "${NGINX_PORT:-8080}:80"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx-config/api-staging.astromao.com.conf:/etc/nginx/conf.d/api-staging.astromao.com.conf:ro
       - sightseeing_map_static_volume:/sightseeing-map/static
     depends_on:
       - sightseeing_map
