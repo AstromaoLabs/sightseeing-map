@@ -4,14 +4,21 @@ import './index.css';
 import UserMap from './UserMap';
 import Header from './component/Header';
 import Footer from './component/Footer';
+import Login from './component/Login';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <Router>
     <Header />
-    <UserMap />
+    <Routes>
+        <Route path="/" element={<UserMap />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     <Footer />
+    </Router>
   </React.StrictMode>
 );
 

@@ -171,6 +171,34 @@ footer select {
   margin: 0;
 }
 
+.login-container{
+display:flex;
+flex-direction: column;
+justify-content: center;
+align-items: center; 
+height:550px;
+background-color: ghostwhite;
+
+}
+
+.login-input{
+  height:45px;
+}
+
+.login-input input {
+  width:100%;
+  height:20px;
+}
+
+.login-input label{
+  margin-right: 10px;
+}
+
+.login-container button{
+  margin-top: 10px;
+}
+
+
 
 @media screen and (max-width: 1024px) {
   .footer-container {

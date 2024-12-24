@@ -20,7 +20,8 @@ class LoginAPI(APIView):
     '''
     Login a user
     '''
-    permission_classes = [permissions.AllowAny] # Allow any user to login
+   # permission_classes = [permissions.AllowAny] # Allow any user to login
+    permission_classes = [""]
 
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
@@ -46,7 +47,8 @@ class LogoutAPI(APIView):
     This endpoint includes a simple error logging mechanism to log token-related errors 
     For debugging purposes and can be removed or kept as needed
     '''
-    permission_classes = [permissions.IsAuthenticated] # Only authenticated users can logout
+    #permission_classes = [permissions.IsAuthenticated] # Only authenticated users can logout
+    permission_classes = [""]
 
     def post(self, request):
         try:

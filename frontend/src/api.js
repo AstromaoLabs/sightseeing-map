@@ -11,3 +11,4 @@ export const fetchData = async (latitude, longitude) => {
     throw error;
   }
 };
+

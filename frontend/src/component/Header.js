@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+
+
 export default function Header(){
   return(
   <>
@@ -10,7 +13,10 @@ export default function Header(){
 </svg>
 </a>
       <button>Sign-Up</button>
+      <Link to="/login">
       <button>Sign-In</button>
+      </Link>
+     
     </div>
     <div className="search">
     <input type="text" placeholder="search" className="search-bar" ></input>
