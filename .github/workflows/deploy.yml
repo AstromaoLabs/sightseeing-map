@@ -1,7 +1,9 @@
 name: Deploy Sightseeing Map App
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -19,12 +21,15 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd ~/sightseeing_map
-            
+
             # Pull latest changes
             git pull origin main
 
-            # Reminder: Update this line to include Scripts workflow when added
+            # Make sure scripts are executable
+            chmod +x ./scripts/*.sh
 
-            # Run deployment scripts: when available
-            echo "Rebuilding Docker containers and collecting static files..."
-            ./scripts/deploy.sh
+            # Initialize the environment
+            ./scripts/initialize_environment.sh
+
+            # Collect static files
+            ./scripts/collect_static.sh
