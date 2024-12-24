@@ -21,7 +21,7 @@ services:
     ports:
       - "${NGINX_PORT:-8080}:80"
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx.conf:/etc/nginx/nginx.conf
       - sightseeing_map_static_volume:/sightseeing-map/static
     depends_on:
       - sightseeing_map
