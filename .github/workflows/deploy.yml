@@ -21,7 +21,7 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             # Reminder to change the directory to the correct one
-            cd ~/sightseeing_map_test
+            cd ~/sightseeing_map
 
             # Pull latest changes
             git pull origin main
