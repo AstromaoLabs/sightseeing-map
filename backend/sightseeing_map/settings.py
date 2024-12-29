@@ -39,8 +39,27 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist', # Invalidates tokens (e.g., after logout)
     'api_keys',
 ]
+CORS_ALLOW_ORIGINS = [
+    'http://localhost:3000',
+    
+]
+#CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000', cast=Csv())
+#CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000', cast=Csv())
+
+CORS_ALLOW_HEADERS = [
+    "content-type",
+    "x-api-key",
+    "authorization",
+]
+
+
+CORS_ORIGIN_ALLOW_ALL = False
+
+
+
+
+#CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000', cast=Csv())
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -52,6 +71,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+
 
 ROOT_URLCONF = 'sightseeing_map.urls'
 
@@ -162,3 +184,4 @@ DEFAULT_FROM_EMAIL = config('DJANGO_DEFAULT_FROM_EMAIL', default='webmaster@loca
 
 # Frontend URL
 FRONTEND_URL = config('FRONTEND_URL', default='http://localhost:3000')
+

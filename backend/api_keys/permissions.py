@@ -28,6 +28,7 @@ class HasValidAPIKey(BasePermission):
     def has_permission(self, request, view):
         # Get the API key from the headers
         api_key = request.headers.get('X-API-KEY')
+        print("Received API Key: {api_key}")
 
         # Raise an exception if the API key is missing
         if not api_key:
