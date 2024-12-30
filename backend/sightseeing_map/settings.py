@@ -21,7 +21,6 @@ DEBUG = config('DJANGO_DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = config('DJANGO_ALLOWED_HOSTS', default='localhost', cast=Csv())
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,27 +38,10 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist', # Invalidates tokens (e.g., after logout)
     'api_keys',
 ]
-CORS_ALLOW_ORIGINS = [
-    'http://localhost:3000',
-    
-]
-#CORS_ALLOW_CREDENTIALS = True
 
-#CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000', cast=Csv())
+CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOW_HEADERS = [
-    "content-type",
-    "x-api-key",
-    "authorization",
-]
-
-
-CORS_ORIGIN_ALLOW_ALL = False
-
-
-
-
-#CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000', cast=Csv())
+CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000', cast=Csv())
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -72,9 +54,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
-
-
+CORS_ALLOW_ALL_ORIGINS = True
 ROOT_URLCONF = 'sightseeing_map.urls'
 
 TEMPLATES = [

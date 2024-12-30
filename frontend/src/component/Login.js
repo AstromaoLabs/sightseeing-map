@@ -10,8 +10,11 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     const data = await loginUser(username, password);
-    if (data.token) {
-      setAuthToken(data.token); 
+    console.log("Login response data:", data);
+    console.log("API response:", data);
+    if (data&&data.token) {
+      setAuthToken(data.token);
+ 
       console.log('Login successful. Token:', data.token);
       
     }
@@ -19,6 +22,8 @@ export default function Login() {
       setErrorMessage("Login failed. Please check your credentials.");
     }
   };
+
+  
 
   return (
     <div className="login-container">

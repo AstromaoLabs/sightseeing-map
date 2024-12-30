@@ -3,6 +3,7 @@ import axios from 'axios';
 const BASE_URL = 'http://127.0.0.1:8000/sightseeing/v1/'; 
 const LOGIN_URL = `${BASE_URL}users/login/`;
 
+
 const loginUser = async (username, password) => {
 
   const API_KEY = process.env.REACT_APP_LOGIN_API_KEY || '';
@@ -12,25 +13,30 @@ const loginUser = async (username, password) => {
     return;
   }
 
-
+  console.log("Preparing to send request...");
+  console.log("Login URL:", LOGIN_URL);
+  console.log("Payload:", { username, password });
+  
   try {
 
     
     const response = await axios.post(
       LOGIN_URL,
       { username, password },
+      
       {
-        headers:{
-          'X-API-KEY':process.env.REACT_APP_LOGIN_API_KEY,
+        headers: {
+          'X-API-KEY': API_KEY, 
           'Content-Type': 'application/json',
-          
         },
-        //withCredentials: true,
+        withCredentials: true,
       }
       
     );
 
+    console.log("API response2:", response);
     return response.data;
+   
 
   } catch (error) {
     // Get Axios error detail
@@ -45,6 +51,7 @@ const loginUser = async (username, password) => {
       console.error("Error setting up request:", error.message);
      
     }
+    return null;
   }
 };
 
