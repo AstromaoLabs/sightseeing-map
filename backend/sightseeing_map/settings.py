@@ -41,7 +41,12 @@ INSTALLED_APPS = [
 
 CORS_ALLOW_CREDENTIALS = True
 
-CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000', cast=Csv())
+CORS_ALLOW_HEADERS = [
+    'content-type',
+    'x-api-key',
+]
+
+#CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000', cast=Csv())
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',

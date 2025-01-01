@@ -49,8 +49,6 @@ class LoginSerializer(serializers.Serializer):
                 }
             }
         raise serializers.ValidationError('Incorrect Credentials')
-
-        
     
 # Forgot Password Request Serializer
 class PasswordResetSerializer(serializers.Serializer):
@@ -111,6 +109,4 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
     def save(self):
         user = self.context['user']
         user.set_password(self.validated_data['new_password'])
-        user.save()
-
-    
+        user.save()    
