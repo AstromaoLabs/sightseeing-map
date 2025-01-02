@@ -39,14 +39,14 @@ INSTALLED_APPS = [
     'api_keys',
 ]
 
-CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_CREDENTIALS = config('CORS_ALLOW_CREDENTIALS', default=True, cast=bool)
 
 CORS_ALLOW_HEADERS = [
     'content-type',
     'x-api-key',
-]
+] # Update by adding to env template when needed
 
-#CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000', cast=Csv())
+CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000', cast=Csv())
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -59,7 +59,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
 ROOT_URLCONF = 'sightseeing_map.urls'
 
 TEMPLATES = [
