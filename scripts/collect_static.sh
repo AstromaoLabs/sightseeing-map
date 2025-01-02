@@ -3,8 +3,8 @@
 
 set -e  # Exit immediately if a command fails
 
-# Find the correct Django container dynamically
-container_name=$(docker ps --filter "name=sightseeing_map" --format "{{.Names}}" | head -n 1)
+# Find the Django container dynamically by name
+container_name=$(docker ps --filter "name=sightseeing_map_sightseeing_map" --format "{{.Names}}" | head -n 1)
 
 if [ -z "$container_name" ]; then
   echo "Error: No container found for the Django service."
