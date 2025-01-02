@@ -1,9 +1,7 @@
 name: Deploy Sightseeing Map App
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:  # Manual trigger (Recommend to keep while integrating - EM)
 
 jobs:
   deploy:
