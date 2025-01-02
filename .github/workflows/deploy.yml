@@ -21,6 +21,9 @@ jobs:
             # Reminder to change the directory to the correct one
             cd ~/sightseeing_map
 
+            # Discard local changes
+            git reset --hard
+            
             # Pull latest changes
             git pull origin main
 
