@@ -8,21 +8,26 @@ ENV PYTHONUNBUFFERED 1
 # Set work directory
 WORKDIR /app
 
-# Install Python dependencies
-# Install Python dependencies
-COPY ./requirements.txt /app/requirements.txt
-RUN echo 'nameserver 8.8.8.8' > /etc/resolv.conf \
-    && pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+# Fix DNS issue
+RUN echo 'nameserver 8.8.8.8' > /etc/resolv.conf
 
-
-# Copy project
-COPY . /app
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    libpq-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Create a non-root user
 RUN useradd -m appuser
 
-# Set ownership and permissions
+# Install Python dependencies as root
+COPY ./requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
+
+# Copy project and set permissions
+COPY . /app
 RUN chown -R appuser:appuser /app
 
 # Switch to non-root user
