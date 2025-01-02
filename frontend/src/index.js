@@ -5,6 +5,7 @@ import UserMap from './UserMap';
 import Header from './component/Header';
 import Footer from './component/Footer';
 import Login from './component/Login';
+import Register from './component/register';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
@@ -16,6 +17,7 @@ root.render(
   <Routes>
       <Route path="/" element={<UserMap />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
     </Routes>
   <Footer />
   </Router>
