@@ -22,7 +22,7 @@ class LoginAPI(APIView):
     Login a user
     '''
     # Temporarily allow access without API key to get the token
-    # permission_classes = [permissions.AllowAny] # Uncomment this line to allow access without API key
+    #permission_classes = [permissions.AllowAny] # Uncomment this line to allow access without API key
     permission_classes = [HasValidAPIKey] # Allow any user to login, # Uncomment this line to bring back security 
     
 

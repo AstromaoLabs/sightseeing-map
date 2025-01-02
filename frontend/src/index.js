@@ -4,15 +4,22 @@ import './index.css';
 import UserMap from './UserMap';
 import Header from './component/Header';
 import Footer from './component/Footer';
+import Login from './component/Login';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Header />
-    <UserMap />
-    <Footer />
-  </React.StrictMode>
+  <Router>
+  <Header />
+  <Routes>
+      <Route path="/" element={<UserMap />} />
+      <Route path="/login" element={<Login />} />
+    </Routes>
+  <Footer />
+  </Router>
+</React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
