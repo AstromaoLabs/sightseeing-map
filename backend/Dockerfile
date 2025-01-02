@@ -9,9 +9,12 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /app
 
 # Install Python dependencies
+# Install Python dependencies
 COPY ./requirements.txt /app/requirements.txt
-RUN pip install --no-cache-dir --upgrade pip \
+RUN echo 'nameserver 8.8.8.8' > /etc/resolv.conf \
+    && pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
+
 
 # Copy project
 COPY . /app
