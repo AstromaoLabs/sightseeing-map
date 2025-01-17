@@ -5,7 +5,9 @@
     "category": "sightseeing",
     "lat": -31.9629,
     "lng": 115.8319,
-    "thumbnail": "/pin/kings_park.jpeg"
+    "thumbnail": "/pin/kings_park.jpeg",
+    "subtitle":"Best park to overlook Perth City",
+    "address":"Fraser Ave, Perth WA 6005"
   },
   {
     "id": 2,
@@ -13,7 +15,9 @@
     "category": "sightseeing",
     "lat": -32.0569,
     "lng": 115.7485,
-    "thumbnail": "/pin/fremantle_market.jpeg"
+    "thumbnail": "/pin/fremantle_market.jpeg",
+    "subtitle":"You can feel Europian Life Style in this town",
+    "address":"South Terrace &, Henderson St, Fremantle WA 6160"
   },
   {
     "id": 3,
@@ -21,7 +25,9 @@
     "category": "restaurant",
     "lat": -31.954187702784,
     "lng": 115.85689265454948,
-    "thumbnail": "/pin/meat_and_wine.jpg"
+    "thumbnail": "/pin/meat_and_wine.jpg",
+    "subtitle":"Good Wine and Restaurant is Here",
+    "address":"Ground Floor/108 St Georges Terrace, Perth WA 6000"
   },
 
   {
@@ -41,6 +47,8 @@
     "category": "restaurant",
     "lat": -31.957934400285293,
     "lng": 115.859133922292,
-    "thumbnail": "/pin/head_perth_restaurant.jpg"
+    "thumbnail": "/pin/head_perth_restaurant.jpg",
+    "subtitle": "Huge Steak",
+    "address":"Shop 1, Ground Floor/One The Esplanade, Perth WA 600"
   }
 ]

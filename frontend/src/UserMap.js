@@ -7,6 +7,7 @@ import {fetchData} from './api';
 import { APIProvider, Map, Pin, AdvancedMarker} from "@vis.gl/react-google-maps";
 import Category from './component/Category';
 import locations from './data/location.json';
+import Sidebar from './component/Sidebar';
 
 function UserMap() {
   const [latitude, setLatitude]=useState(null);
@@ -14,6 +15,8 @@ function UserMap() {
   const[api,setApi] = useState([]);
   const[selectedCategory,setSelectedCategory] = useState("all");
   const category=["all","sightseeing","restaurant","cafe"];
+  const[selectedLocation, setSelectedLocation]=useState(null);
+  const [zoom, setZoom]= useState(12);
   
  useEffect(()=>{
     navigator.geolocation.getCurrentPosition((position)=>{
@@ -57,6 +60,7 @@ function UserMap() {
   console.log(selectedCategory);
   console.log(filteredLocation);
   console.log(setSelectedCategory);
+  
   return (
    
     <div className="App">
@@ -67,15 +71,32 @@ function UserMap() {
         selectedCategory={selectedCategory}
         setSelectedCategory={setSelectedCategory}
         />
+        <div class="map-sidebar">
         <div className="map">
-          <Map zoom={11} center ={center} mapId = {process.env.REACT_APP_MAP_ID}></Map>
+          <Map zoom={zoom} scaleControl={true} center ={center} mapId = {process.env.REACT_APP_MAP_ID}
+          mapOptions={{
+            zoomControl: true,
+            fullscreenControl: true,
+            streetViewControl: false,
+            scrollwheel: true,
+            gestureHandling: "greedy",
+            disableDoubleClickZoom: false, 
+            zoomControlOptions: {
+              position: window.google ? window.google.maps.ControlPosition.RIGHT_CENTER : null,  //from the docs 
+            },
+          }}
+          onZoomChanged={(event) => setZoom(event.detail.zoom)}
+          ></Map>
+        </div>
+        <Sidebar location={selectedLocation} />
         </div>
         <AdvancedMarker position ={center}></AdvancedMarker>
         {filteredLocation?.map((location,index)=>{
           const mapBorderClass= selectedCategory==='all'?`map-border-${location.category}`:`map-border-${selectedCategory}`;
            
            return(
-          <AdvancedMarker key={index} position={{lat:location.lat,lng: location.lng}} >
+          <AdvancedMarker key={index} position={{lat:location.lat,lng: location.lng}}
+          onClick={()=>setSelectedLocation(location)} >
             <div className={`pin ${mapBorderClass}`}>
               <img className="pin-picture" src={location.thumbnail} alt ={location.name}></img>
             </div>

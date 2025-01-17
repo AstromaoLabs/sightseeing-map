@@ -7,6 +7,8 @@ import Footer from './component/Footer';
 import Login from './component/Login';
 import Register from './component/register';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import PasswordResetRequest from './component/resetpassword';
+import PasswordResetConfirm from './component/confirm-reset-password';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -18,6 +20,8 @@ root.render(
       <Route path="/" element={<UserMap />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/reset-password" element={<PasswordResetRequest />} />
+      <Route path="/confirm-reset-password" element={<PasswordResetConfirm />} />
     </Routes>
   <Footer />
   </Router>
