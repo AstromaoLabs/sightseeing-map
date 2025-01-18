@@ -1,36 +1,41 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom"; 
+import axios from "axios";
 
 const PasswordResetConfirm = () => {
-  const [token, setToken] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const { uid, token } = useParams(); //in url params
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+
+  // useEffect(() => {
+  //   console.log("UID:", uid);  //print uid and tok for testing
+  //   console.log("Token:", token); 
+  // }, [uid, token]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //try1
     try {
-      const res = await axios.post('http://127.0.0.1:8000/sightseeing/v1/users/reset-password/confirm/', {
-        token,
-        password,
-      });
-      setMessage('password is successfully reset.');
+      const res = await axios.post(
+        "http://127.0.0.1:8000/sightseeing/v1/users/reset-password/confirm/",
+        { uid, token, new_password: password }, 
+        {
+          headers: {
+            "X-API-Key": process.env.REACT_APP_LOGIN_API_KEY,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      setMessage(res.data.message);
     } catch (error) {
-      setMessage('error.');
+      setMessage(error.response?.data?.error || "erorrrorororro");
     }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <h2>Reset Your Password</h2>
-      <input
-        type="text"
-        placeholder="enter token"
-        value={token}
-        onChange={(e) => setToken(e.target.value)}
-        required
-      />
 
       <input
         type="password"

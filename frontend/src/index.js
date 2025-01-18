@@ -21,7 +21,7 @@ root.render(
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/reset-password" element={<PasswordResetRequest />} />
-      <Route path="/confirm-reset-password" element={<PasswordResetConfirm />} />
+      <Route path="/confirm-reset-password/:uid/:token" element={<PasswordResetConfirm />} />
     </Routes>
   <Footer />
   </Router>
