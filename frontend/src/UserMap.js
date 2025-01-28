@@ -76,44 +76,26 @@ function UserMap() {
         <div className="map">
           {/* map*/}
           {center && (
-           <Map
-           zoom={zoom}
-           center={center}
-           mapId={process.env.REACT_APP_MAP_ID}
-           mapOptions={{
-             zoomControl: true,
-             fullscreenControl: true,
-             streetViewControl: false,
-             scrollwheel: true,
-             gestureHandling: "greedy",
-             disableDoubleClickZoom: false,
-             zoomControlOptions: {
-               position: window.google?.maps?.ControlPosition?.RIGHT_CENTER,
-             },
-           }}
-           onZoomChanged={() => {
-             const newZoom = api?.map?.getZoom();  // ズームレベルを取得
-             console.log(newZoom);  // ズームレベルの変更をログに表示
-             setZoom(newZoom);  // ズーム状態を更新
-           }}
-           onCenterChanged={(event) => setCenter(event.detail.center)}
-         >
-           {/* geolocation marker */}
-           {showMarker && location && <AdvancedMarker position={location} />}
-           
-           {/* filtering */}
-           {filteredLocations.map((location) => (
-             <AdvancedMarker key={location.id} position={{ lat: location.lat, lng: location.lng }}>
-               <div className="pin">
-                 {location.thumbnail && <img className="pin-picture" src={location.thumbnail} alt={location.name} />}
-               </div>
-             </AdvancedMarker>
-           ))}
-         </Map>
-         
+            <Map
+            zoom={zoom}
+            center={center}
+            mapId={process.env.REACT_APP_MAP_ID}
+            mapOptions={{
+              zoomControl: true,
+              fullscreenControl: true,
+              streetViewControl: false,
+              scrollwheel: true,  // ズーム操作の有効化
+              gestureHandling: "greedy",  // ジェスチャー操作
+              disableDoubleClickZoom: false,
+              zoomControlOptions: {
+                position: window.google?.maps?.ControlPosition?.RIGHT_CENTER, // 修正
+              },
+            }}
+            onCenterChanged={(event) => setCenter(event.detail.center)}
+          >
+          
           )}
         </div>
-        
       </APIProvider>
     </div>
   );
