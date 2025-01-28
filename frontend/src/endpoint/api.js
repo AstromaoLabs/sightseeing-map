@@ -96,5 +96,7 @@ const registerUser = async(username,email,password)=>{
   }
 };
 
+
+
 export default loginUser;
 export { registerUser };
