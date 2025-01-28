@@ -91,7 +91,5 @@ function UserMap() {
      </div>
   );
 }
-
-
 export default UserMap;
  
