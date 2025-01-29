@@ -68,6 +68,10 @@ function UserMap() {
   return (
     <div className="App">
       <APIProvider apiKey={process.env.REACT_APP_API_KEY}>
+      <Category categories={category}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
         <div className="map">
           {center.lat !== null && center.lng !== null && (
             <Map
