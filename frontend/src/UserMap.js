@@ -1,50 +1,34 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import { fetchData } from './api';
 import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
-
-const locations = [
-  {
-    id: 1,
-    name: "Kings Park",
-    lat: -31.9629,
-    lng: 115.8319,
-    thumbnail: "/pin/kings_park.jpeg"
-  },
-  {
-    id: 2,
-    name: "Fremantle Market",
-    lat: -32.0569,
-    lng: 115.7485,
-    thumbnail: "/pin/fremantle_market.jpeg",
-  },
-  {
-    id: 3,
-    name: "Top Restaurant",
-    lat: -31.9525,
-    lng: 115.8610,
-    thumbnail: "",
-  },
-];
+import Category from './component/Category';
+import locations from './data/location.json';
 
 function UserMap() {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
-  const [zoom, setZoom] = useState(12); 
-  const [api, setApi] = useState(null);
+  const [api, setApi] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [zoom, setZoom] = useState(11);
+  const [center, setCenter] = useState({ lat: null, lng: null }); // Start with null values
 
-  const defaultCenter = { lat: -6.2088, lng: 106.8456 };
-  const [location, setLocation] = useState(null); 
-  const [center, setCenter] = useState(defaultCenter); //try 1
-  // const center = latitude && longitude ? { lat: latitude, lng: longitude } : defaultCenter; //orig code
+  const category = ["all", "sightseeing", "restaurant", "cafe"];
 
+  // Get user's current location
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
-      const userLocation = { lat: position.coords.latitude, lng: position.coords.longitude };
-      setLocation(userLocation);
-      setCenter(userLocation);
+      setLatitude(position.coords.latitude);
+      setLongitude(position.coords.longitude);
     });
   }, []);
+
+  // Update center when latitude or longitude changes
+  useEffect(() => {
+    if (latitude !== null && longitude !== null) {
+      setCenter({ lat: latitude, lng: longitude });
+    }
+  }, [latitude, longitude]);
 
   function getDistance(lat1, lng1, lat2, lng2) {
     const R = 6371; // Earth radius in km
@@ -58,11 +42,9 @@ function UserMap() {
     return R * c; // Distance in km
   }
 
-  const showMarker = location && getDistance(location.lat, location.lng, center.lat, center.lng) < 1;
-
+  // Fetch data from API based on user's location
   useEffect(() => {
     if (latitude && longitude) {
-      setCenter({ lat: latitude, lng: longitude });
       fetchData(latitude, longitude).then((data) => {
         setApi(data);
         console.log(data);
@@ -72,11 +54,26 @@ function UserMap() {
     }
   }, [latitude, longitude]);
 
+  // Use either API data or fallback to local locations data
+  const locationData = api && Array.isArray(api) ? api : locations;
+
+  // Filter locations based on selected category
+  const filteredLocation = locationData.filter(location => {
+    if (selectedCategory === 'all') {
+      return true;
+    }
+    return location.category === selectedCategory;
+  });
+
   return (
     <div className="App">
       <APIProvider apiKey={process.env.REACT_APP_API_KEY}>
+      <Category categories={category}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
         <div className="map">
-          {center && (
+          {center.lat !== null && center.lng !== null && (
             <Map
               zoom={zoom}
               center={center}
@@ -89,16 +86,13 @@ function UserMap() {
                 gestureHandling: "greedy",
                 disableDoubleClickZoom: false,
                 zoomControlOptions: {
-                  position: window.google?.maps?.ControlPosition?.RIGHT_CENTER || 9, // set to 9 as a fallback i guess
+                  position: window.google?.maps?.ControlPosition?.RIGHT_CENTER || 9, // set to 9 as a fallback
                 },
-              }}              
-              // onZoomChanged={(event) => setZoom(event.detail.zoom)} //try try tyr to zoom in and out
-              onCenterChanged={(event) => setCenter(event.detail.center)}>
-            
-            {showMarker && location && <AdvancedMarker position={location} />}
-
-            
-              {locations.map((location) => (
+              }}
+              onZoomChanged={(event) => setZoom(event.detail.zoom)} 
+              onCenterChanged={(event) => setCenter(event.detail.center)}
+            >
+              {filteredLocation.map((location) => (
                 <AdvancedMarker key={location.id} position={{ lat: location.lat, lng: location.lng }}>
                   <div className="pin">
                     {location.thumbnail && <img className="pin-picture" src={location.thumbnail} alt={location.name} />}

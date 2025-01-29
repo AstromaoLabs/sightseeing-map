@@ -7,14 +7,52 @@
   display: flex;
 }
 
-.pin{
+.map-border-sightseeing{
+  border: 2px solid skyblue;
+  border-radius: 50%;
+  overflow: hidden;
   width:40px;
   height:40px;
-  border-radius: 50%;
-  border: 2px solid orange;
-  overflow: hidden;
   box-shadow: "0 2px 6px rgba(0,0,0,0.3)";
 }
+
+.map-border-restaurant{
+  border: 2px solid palevioletred;
+  border-radius: 50%;
+  overflow: hidden;
+  width:40px;
+  height:40px;
+  box-shadow: "0 2px 6px rgba(0,0,0,0.3)";
+}
+
+.map-border-cafe{
+  border: 2px solid brown;
+  border-radius: 50%;
+  overflow: hidden;
+  width:40px;
+  height:40px;
+  box-shadow: "0 2px 6px rgba(0,0,0,0.3)";
+}
+
+.pin {
+  border-radius: 50%;
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.map-border-all{
+  
+  border: 2px solid;
+  border-radius: 50%;
+  overflow: hidden;
+  width:40px;
+  height:40px;
+  box-shadow: "0 2px 6px rgba(0,0,0,0.3)";
+}
+
+
 
 .pin-picture{
   width:100%;
@@ -170,6 +208,33 @@ footer select {
 .footer-bottom p {
   margin: 0;
 }
+
+.category-container{
+  display: flex;
+  margin: 10px;
+  justify-content: right;
+}
+
+.category-button{
+  margin: 5px;
+  border-radius: 20px;
+  background-color: fff;
+  color: #333;
+  width:100px;
+  height:35px;
+}
+
+.category-button:hover{
+  background-color: #333;
+  color: #fff;
+
+}
+
+.category-button.active{
+  background-color: #FF8C00;
+  color:#fff;
+}
+
 
 
 @media screen and (max-width: 1024px) {
