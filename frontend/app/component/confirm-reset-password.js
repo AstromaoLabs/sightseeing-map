@@ -21,7 +21,7 @@ const PasswordResetConfirm = () => {
         { uid, token, new_password: password }, 
         {
           headers: {
-            "X-API-Key": process.env.REACT_APP_LOGIN_API_KEY,
+            "X-API-Key": process.env.NEXT_PUBLIC_LOGIN_API_KEY,
             "Content-Type": "application/json",
           },
         }

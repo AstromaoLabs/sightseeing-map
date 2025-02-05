@@ -1,5 +1,4 @@
-
-
+@import "tailwindcss";
 
 .map{
   width: 100%;
@@ -65,6 +64,8 @@
   height:50px;
 }
 
+
+
 .user{
   grid-area: signin;
   display:flex;
@@ -87,6 +88,9 @@
 }
 
 /*Header style*/
+
+
+
 
 .header{
   display:grid;
@@ -117,6 +121,7 @@ justify-content: center;
   height:30px;
   border-radius: 10px;
 }
+
 
 
 /* Entire footer style */
