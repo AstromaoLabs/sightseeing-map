@@ -13,7 +13,7 @@
     "category": "sightseeing",
     "lat": -32.0569,
     "lng": 115.7485,
-    "thumbnail": "/pin/fremantle_market.jpeg"
+    "thumbnail": "/pin/freamantle_market.jpeg"
   },
   {
     "id": 3,
@@ -41,6 +41,17 @@
     "category": "restaurant",
     "lat": -31.957934400285293,
     "lng": 115.859133922292,
-    "thumbnail": "/pin/head_perth_restaurant.jpg"
+    "thumbnail": "/pin/head_perth_restaurant.jpg",
+        "desc": "6HEAD is a world-class dining experience that celebrates some of the world’s most distinguished wine and beef. The restaurant is located in the heart of the city, offering a unique dining experience that is both elegant and relaxed. The restaurant is a celebration of the world’s best beef and wine, with a menu that showcases the finest cuts of beef from around the world, paired with an extensive wine list that features some of the world’s most prestigious wines. The restaurant is a place where guests can enjoy a world-class dining experience that is both elegant and relaxed, with a menu that is designed to showcase the best of what the world has to offer."
+  },
+
+  {
+    "id": 6,
+    "name": "6HEAD Perth",
+    "category": "cafe",
+    "lat": 18.4117475,
+    "lng": 122.133855375,
+    "thumbnail": "/pin/head_perth_restaurant.jpg",
+    "desc": "6HEAD is a world-class dining experience that celebrates some of the world’s most distinguished wine and beef. The restaurant is located in the heart of the city, offering a unique dining experience that is both elegant and relaxed. The restaurant is a celebration of the world’s best beef and wine, with a menu that showcases the finest cuts of beef from around the world, paired with an extensive wine list that features some of the world’s most prestigious wines. The restaurant is a place where guests can enjoy a world-class dining experience that is both elegant and relaxed, with a menu that is designed to showcase the best of what the world has to offer."
   }
 ]
