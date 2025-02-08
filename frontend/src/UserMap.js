@@ -1,21 +1,30 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import { fetchData } from './api';
-import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
-import Category from './component/Category';
-import locations from './data/location.json';
+import { useEffect, useState } from "react";
+import "./App.css";
+import {
+  APIProvider,
+  Map,
+  AdvancedMarker,
+  useAdvancedMarkerRef,
+  useMap,
+} from "@vis.gl/react-google-maps";
+import locations from "./data/location.json";
+import { fetchData } from "./api";
 
-function UserMap() {
+const UserMap = ({
+  categories,
+  selectedCategory,
+  setSelectedCategory,
+  center,
+  setCenter,
+  zoom,
+  setZoom,
+  selectedPlace,
+}) => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [api, setApi] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [zoom, setZoom] = useState(11);
-  const [center, setCenter] = useState({ lat: null, lng: null }); // Start with null values
+  const [markerRef, marker] = useAdvancedMarkerRef();
 
-  const category = ["all", "sightseeing", "restaurant", "cafe"];
-
-  // Get user's current location
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       setLatitude(position.coords.latitude);
@@ -23,88 +32,120 @@ function UserMap() {
     });
   }, []);
 
-  // Update center when latitude or longitude changes
-  useEffect(() => {
-    if (latitude !== null && longitude !== null) {
-      setCenter({ lat: latitude, lng: longitude });
-    }
-  }, [latitude, longitude]);
-
-  function getDistance(lat1, lng1, lat2, lng2) {
-    const R = 6371; // Earth radius in km
-    const dLat = (lat2 - lat1) * (Math.PI / 180);
-    const dLng = (lng2 - lng1) * (Math.PI / 180);
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
-      Math.sin(dLng / 2) * Math.sin(dLng / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c; // Distance in km
-  }
-
-  // Fetch data from API based on user's location
+  // use either API data or fallback to local locations data
   useEffect(() => {
     if (latitude && longitude) {
-      fetchData(latitude, longitude).then((data) => {
-        setApi(data);
-        console.log(data);
-      }).catch((error) => {
-        console.error("Error fetching data:", error);
-      });
+      fetchData(latitude, longitude)
+        .then((data) => {
+          setApi(data);
+          console.log(data);
+        })
+        .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
     }
   }, [latitude, longitude]);
 
-  // Use either API data or fallback to local locations data
   const locationData = api && Array.isArray(api) ? api : locations;
 
-  // Filter locations based on selected category
-  const filteredLocation = locationData.filter(location => {
-    if (selectedCategory === 'all') {
-      return true;
-    }
-    return location.category === selectedCategory;
-  });
+  //filtering location based on category component
+  const filteredLocation =
+    selectedCategory.toLowerCase() === "all"
+      ? locationData
+      : locationData.filter(
+          (location) =>
+            location.category.toLowerCase() === selectedCategory.toLowerCase()
+        );
+
+  //added this for markers info. pls check also docu
+  // const MarkerWithInfoWindow = ({ position, location }) => {
+  //   const [infoWindowShown, setInfoWindowShown] = useState(false);
+
+  //   const handleMarkerClick = useCallback(() => {
+  //     setInfoWindowShown((isShown) => !isShown);
+  //   }, []);
+
+  //   const handleClose = useCallback(() => setInfoWindowShown(false), []);
+
+  //   return (
+  //     <>
+  //      <AdvancedMarker
+  //       ref={markerRef}
+  //       position={position}
+  //       onClick={handleMarkerClick}
+  //     >
+  //       <div className="pin">
+  //         {location.thumbnail && (
+  //           <img
+  //             className="pin-picture"
+  //             src={location.thumbnail}
+  //             alt={location.name}
+  //           />
+  //         )}
+  //       </div>
+  //     </AdvancedMarker>
+
+  //       {infoWindowShown && (
+  //         <InfoWindow position={position} onClose={handleClose}>
+  //           <h2>{location.name}</h2>
+  //           <p>{location.desc}</p>
+  //         </InfoWindow>
+  //       )}
+  //     </>
+  //   );
+  // };
+
+  const MapHandler = ({ place, marker }) => {
+    const map = useMap();
+
+    useEffect(() => {
+      if (!map || !place || !marker) return;
+
+      if (place.geometry?.viewport) {
+        map.fitBounds(place.geometry?.viewport);
+      }
+
+      marker.position = place.geometry?.location;
+    }, [map, place, marker]);
+    return null;
+  };
 
   return (
     <div className="App">
       <APIProvider apiKey={process.env.REACT_APP_API_KEY}>
-      <Category categories={category}
-          selectedCategory={selectedCategory}
-          setSelectedCategory={setSelectedCategory}
-        />
         <div className="map">
-          {center.lat !== null && center.lng !== null && (
-            <Map
-              zoom={zoom}
-              center={center}
-              mapId={process.env.REACT_APP_MAP_ID}
-              mapOptions={{
-                zoomControl: true,
-                fullscreenControl: true,
-                streetViewControl: false,
-                scrollwheel: true,
-                gestureHandling: "greedy",
-                disableDoubleClickZoom: false,
-                zoomControlOptions: {
-                  position: window.google?.maps?.ControlPosition?.RIGHT_CENTER || 9, // set to 9 as a fallback
-                },
-              }}
-              onZoomChanged={(event) => setZoom(event.detail.zoom)} 
-              onCenterChanged={(event) => setCenter(event.detail.center)}
-            >
-              {filteredLocation.map((location) => (
-                <AdvancedMarker key={location.id} position={{ lat: location.lat, lng: location.lng }}>
-                  <div className="pin">
-                    {location.thumbnail && <img className="pin-picture" src={location.thumbnail} alt={location.name} />}
-                  </div>
-                </AdvancedMarker>
-              ))}
-            </Map>
-          )}
+          <Map
+            defaultZoom={zoom}
+            defaultCenter={{ lat: -34.397, lng: 150.644 }}
+            mapId={process.env.REACT_APP_MAP_ID}
+            gestureHandling={"greedy"}
+            disableDefaultUI={true}
+          >
+            {filteredLocation.map((location) => (
+              <AdvancedMarker
+                key={location.id}
+                position={{ lat: location.lat, lng: location.lng }}
+              >
+                <div className="pin">
+                  {location.thumbnail && (
+                    <img
+                      className="pin-picture"
+                      src={location.thumbnail}
+                      alt={location.name}
+                    />
+                  )}
+                </div>
+              </AdvancedMarker>
+            ))}
+
+            <AdvancedMarker ref={markerRef} position={null} />
+
+            <MapHandler place={selectedPlace} marker={marker} />
+          </Map>
         </div>
       </APIProvider>
     </div>
   );
-}
+};
 
 export default UserMap;
