@@ -4,10 +4,9 @@ const BASE_URL = 'http://127.0.0.1:8000/sightseeing/v1/';
 const LOGIN_URL = `${BASE_URL}users/login/`;
 const REGISTER_URL = `${BASE_URL}users/register/`;
 
-
 const loginUser = async (username, password) => {
 
-  const API_KEY = process.env.REACT_APP_LOGIN_API_KEY || '';
+  const API_KEY = process.env.NEXT_PUBLIC_LOGIN_API_KEY || '';
   if (!API_KEY) {
     console.error('API Key is missing. Check .env configuration.');
     alert('Internal configuration error. Please contact support.');
@@ -57,7 +56,7 @@ const loginUser = async (username, password) => {
 };
 
 const registerUser = async(username,email,password)=>{
-  const API_KEY = process.env.REACT_APP_LOGIN_API_KEY || '';
+  const API_KEY = process.env.NEXT_PUBLIC_LOGIN_API_KEY || '';
   if (!API_KEY) {
     console.error('API Key is missing. Check .env configuration.');
     alert('Internal configuration error. Please contact support.');

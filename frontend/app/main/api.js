@@ -1,4 +1,6 @@
-const apiKey = process.env.REACT_APP_API_KEY;
+"use client";
+
+const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
 export const fetchData = async (latitude, longitude) => {
   try {
