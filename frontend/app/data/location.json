@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "name": "Kings Park",
+    "category": "sightseeing",
+    "lat": -31.9629,
+    "lng": 115.8319,
+    "thumbnail": "/pin/kings_park.jpeg"
+  },
+  {
+    "id": 2,
+    "name": "Fremantle Market",
+    "category": "sightseeing",
+    "lat": -32.0569,
+    "lng": 115.7485,
+    "thumbnail": "/pin/freamantle_market.jpeg"
+  },
+  {
+    "id": 3,
+    "name": "The Meat & Wine Co Perth",
+    "category": "restaurant",
+    "lat": -31.954187702784,
+    "lng": 115.85689265454948,
+    "thumbnail": "/pin/meat_and_wine.jpg"
+  },
+
+  {
+    "id": 4,
+    "name": "Cozy Cafe",
+    "category": "cafe",
+    "lat": -31.955,
+    "lng": 115.857,
+    "thumbnail": "/pin/cozy_cafe.jpeg"
+  },
+
+  
+
+  {
+    "id": 5,
+    "name": "6HEAD Perth",
+    "category": "restaurant",
+    "lat": -31.957934400285293,
+    "lng": 115.859133922292,
+    "thumbnail": "/pin/head_perth_restaurant.jpg",
+        "desc": "6HEAD is a world-class dining experience that celebrates some of the world’s most distinguished wine and beef. The restaurant is located in the heart of the city, offering a unique dining experience that is both elegant and relaxed. The restaurant is a celebration of the world’s best beef and wine, with a menu that showcases the finest cuts of beef from around the world, paired with an extensive wine list that features some of the world’s most prestigious wines. The restaurant is a place where guests can enjoy a world-class dining experience that is both elegant and relaxed, with a menu that is designed to showcase the best of what the world has to offer."
+  },
+
+  {
+    "id": 6,
+    "name": "6HEAD Perth",
+    "category": "cafe",
+    "lat": 1823.4117475,
+    "lng": 1222.133855375,
+    "thumbnail": "/pin/head_perth_restaurant.jpg",
+    "desc": "6HEAD is a world-class dining experience that celebrates some of the world’s most distinguished wine and beef. The restaurant is located in the heart of the city, offering a unique dining experience that is both elegant and relaxed. The restaurant is a celebration of the world’s best beef and wine, with a menu that showcases the finest cuts of beef from around the world, paired with an extensive wine list that features some of the world’s most prestigious wines. The restaurant is a place where guests can enjoy a world-class dining experience that is both elegant and relaxed, with a menu that is designed to showcase the best of what the world has to offer."
+  }
+]

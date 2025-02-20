@@ -1,7 +1,9 @@
-import { useState } from "react";
-import loginUser from "../endpoint/api";
+"use client";
 
-export default function Login() {
+import { useState } from 'react';
+import loginUser from '../../endpoint/api';
+
+const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [authToken, setAuthToken] = useState(null);
@@ -53,3 +55,5 @@ export default function Login() {
     </div>
   );
 }
+
+export default Login;

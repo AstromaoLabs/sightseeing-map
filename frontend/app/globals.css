@@ -1,5 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 .map{
   width: 100%;
@@ -54,9 +73,10 @@
 
 
 
-.pin-picture{
-  width:100%;
+.pin-picture {
+  width: 100%;
   height: 100%;
+  object-fit: cover; 
 }
 
 .logo{
@@ -88,7 +108,7 @@
 
 /*Header style*/
 
-.header{
+/* .header{
   display:grid;
   grid-template-columns: 70px minmax(300px, 1fr) 260px;
   grid-template-areas: "logo searchbar signin";
@@ -116,7 +136,7 @@ justify-content: center;
   width:60px;
   height:30px;
   border-radius: 10px;
-}
+} */
 
 
 /* Entire footer style */
@@ -255,4 +275,46 @@ footer select {
   footer select {
     width: 100%; 
   }
+}
+
+#app {
+  width: 100vw;
+  height: 100vh;
+}
+
+.autocomplete-container input,
+.autocomplete-control {
+  box-sizing: border-box;
+}
+
+.autocomplete-control {
+  margin: 24px;
+  background: #fff;
+}
+
+.autocomplete-container {
+  width: 300px;
+}
+
+.autocomplete-container input {
+  width: 100%;
+  height: 40px;
+  padding: 0 12px;
+  font-size: 18px;
+}
+
+.autocomplete-container .custom-list {
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.autocomplete-container .custom-list-item {
+  padding: 8px;
+}
+
+.autocomplete-container .custom-list-item:hover {
+  background: lightgrey;
+  cursor: pointer;
 }
