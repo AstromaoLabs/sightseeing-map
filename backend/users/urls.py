@@ -1,5 +1,5 @@
 from django.urls import path 
-from .views import RegisterAPI, LoginAPI, LogoutAPI, UserAPI, PasswordResetRequestAPI, PasswordResetConfirmAPI
+from .views import RegisterAPI, LoginAPI, LogoutAPI, UserAPI, PasswordResetRequestAPI, PasswordResetConfirmAPI, del_location, edit_location, list_locations, add_location
 from rest_framework_simplejwt.views import TokenRefreshView
 
 urlpatterns = [
@@ -10,4 +10,8 @@ urlpatterns = [
     path('users/reset-password/confirm/', PasswordResetConfirmAPI.as_view(), name='reset-password-confirm'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), # Revise location if needed
     path('users/me/', UserAPI.as_view(), name='user-detail'),
+    path ('places/list/', list_locations, name="list"),
+    path ('places/add/', add_location, name="add"),
+    path('places/update/', edit_location, name="edit"),
+    path('places/delete/', del_location, name="del"),
 ]

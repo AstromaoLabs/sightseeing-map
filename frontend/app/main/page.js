@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import {
   APIProvider,
@@ -10,6 +10,7 @@ import {
   useMap,
 } from "@vis.gl/react-google-maps";
 import locations from "../data/location.json";
+import { Pin } from "lucide-react";
 
 const UserMap = ({
   categories,
@@ -23,7 +24,7 @@ const UserMap = ({
 
   const getLocation = () => {
     if (!navigator.geolocation) {
-      alert("geolocation is not supported by your browser. pleaseeeeee try to enable");
+      alert("Geolocation is not supported by your browser. Please enable it.");
       return;
     }
 
@@ -35,11 +36,15 @@ const UserMap = ({
         });
       },
       (error) => {
-        console.error("errrrrrrrror getting location:", error);
-        alert("failed to get location.");
+        console.error("Error getting location:", error);
+        alert("Failed to get location.");
       }
     );
   };
+
+  useEffect(() => {
+    getLocation();
+  }, []);
 
   // filter in cat in header
   const filteredLocation =
@@ -67,10 +72,9 @@ const UserMap = ({
     <div className="App">
       <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
         <div className="map">
-
           <Map
             defaultZoom={zoom}
-            defaultCenter={center}
+            defaultCenter={center.lat && center.lng ? center : { lat: 0, lng: 0 }} //i keep getting error in the coordinates so we try this to handle it properly
             mapId={process.env.NEXT_PUBLIC_MAP_ID}
             gestureHandling={"greedy"}
             disableDefaultUI={true}
@@ -96,9 +100,7 @@ const UserMap = ({
 
             {userLocation && (
               <AdvancedMarker position={userLocation}>
-                <h1>
-                  im hereeeee
-                </h1>
+                <Pin size={20} color={"Blue"}/>
               </AdvancedMarker>
             )}
 
