@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework_simplejwt.token_blacklist', # Invalidates tokens (e.g., after logout)
     'api_keys',
+    'map',
 ]
 
 CORS_ALLOW_CREDENTIALS = config('CORS_ALLOW_CREDENTIALS', default=True, cast=bool)
