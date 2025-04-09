@@ -9,5 +9,5 @@ urlpatterns = [
     path('users/reset-password/', PasswordResetRequestAPI.as_view(), name='reset-password-request'),
     path('users/reset-password/confirm/', PasswordResetConfirmAPI.as_view(), name='reset-password-confirm'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), # Revise location if needed
-    path('users/me/', UserAPI.as_view(), name='user-detail'),
+    path('users/me/', UserAPI.as_view(), name='user-detail')
 ]

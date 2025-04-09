@@ -39,6 +39,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('sightseeing/v1/', include('api_keys.urls')), # Include the api_keys app
     path('sightseeing/v1/', include('users.urls')), # Include the users app
+    path('sightseeing/v1/places/', include('map.urls')),
 
     re_path(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'), # Keep This Three
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),                 # Lines While drf-yasg

@@ -11,7 +11,7 @@ const App = () => {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [zoom, setZoom] = useState(11);
-  const [center, setCenter] = useState({ lat: null, lng: null });
+  const [center, setCenter] = useState({ lat: null, lng: null }); 
   const [selectedPlace, setSelectedPlace] = useState(null);
 
   const categories = [
@@ -37,7 +37,7 @@ const App = () => {
   }, [latitude, longitude]);
 
   return (
-    <APIProvider apiKey={process.env.REACT_APP_API_KEY}>
+    <APIProvider apiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}>
       <Header
         categories={categories}
         selectedCategory={selectedCategory}
@@ -48,8 +48,7 @@ const App = () => {
       <UserMap
         categories={categories}
         selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-        center={center}
+        center={center.lat && center.lng ? center : { lat: 0, lng: 0 }}
         setCenter={setCenter}
         zoom={zoom}
         setZoom={setZoom}

@@ -1,3 +1,4 @@
+from json import dumps
 from rest_framework import generics, permissions, status # Used to enhance the views
 from rest_framework.response import Response 
 from rest_framework.views import APIView 
@@ -7,6 +8,7 @@ from rest_framework_simplejwt.views import TokenRefreshView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
 from api_keys.permissions import HasValidAPIKey
+
 
 # Register API
 class RegisterAPI(generics.CreateAPIView):
@@ -102,3 +104,4 @@ class PasswordResetConfirmAPI(APIView):
             serializer.save()
             return Response({"message": "Password has been reset succesfully."}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+

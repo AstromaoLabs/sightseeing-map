@@ -2,7 +2,10 @@ import os
 from pathlib import Path
 from decouple import Config, Csv, RepositoryEnv
 from datetime import timedelta # This is for the JWT token expiration time
-
+# from pymongo import MongoClient #this is mongo
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
+from dotenv import load_dotenv #i'm having problems getting in env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,6 +40,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework_simplejwt.token_blacklist', # Invalidates tokens (e.g., after logout)
     'api_keys',
+    'map',
 ]
 
 CORS_ALLOW_CREDENTIALS = config('CORS_ALLOW_CREDENTIALS', default=True, cast=bool)
@@ -89,6 +93,15 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+load_dotenv() #try to load from env
+
+MONGO_URI = os.getenv("MONGO_URI")
+
+client = MongoClient(MONGO_URI)
+MONGO_DB = client["sightseeing_maps"] #database_name
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
