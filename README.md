@@ -16,7 +16,7 @@ This project is a collaborative Django + React application designed to help user
 - Provides visually appealing marker designs, including circled pins.
 
 ### **Filtering and Listing**
-- Fetches place data from the backend API and applies filters:
+- Fetches place data from the backend API and applie filters:
   - By proximity (e.g., within 30 minutes by foot).
   - By category (e.g., restaurants, activities).
 - Displays a scrollable list with details:
