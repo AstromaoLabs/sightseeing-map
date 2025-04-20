@@ -3,6 +3,8 @@ import axios from 'axios';
 const BASE_URL = 'http://127.0.0.1:8000/sightseeing/v1/'; 
 const LOGIN_URL = `${BASE_URL}users/login/`;
 const REGISTER_URL = `${BASE_URL}users/register/`;
+//user location
+const LOCATION_URL = `${BASE_URL}places/list/`;
 
 const loginUser = async (username, password) => {
 
@@ -95,7 +97,45 @@ const registerUser = async(username,email,password)=>{
   }
 };
 
+const userLocation = async(name,lng,lat,category,img)=>{
+  
+    const MAP_API_KEY = process.env.NEXT_PUBLIC_MAP_API_KEY|| '';
+    if (!MAP_API_KEY) {
+      console.error('API Key is missing. Check .env configuration.');
+      alert('Internal configuration error. Please contact support.');
+      return;
+    }
+  
+    console.log("Preparing to send request...");
+    console.log("Map URL:", LOCATION_URL);
+    console.log("MAP_API_KEY:", process.env.NEXT_PUBLIC_MAP_API_KEY);
+
+
+
+  try{
+    const response = await axios.get(LOCATION_URL, {
+      params: { name, lng, lat, category, img }, 
+      headers: {
+        Authorization: `Bearer ${MAP_API_KEY}`,
+      },
+    });
+    console.log("API response2:", response);
+    return response.data;
+  }
+  catch (error) {
+    if (error.response) {
+      console.error("Server responded with an error:", error.response.data);
+    } else if (error.request) {
+      console.error("No response received:", error.request);
+    } else {
+      console.error("Error setting up request:", error.message);
+    }
+    return null;
+  }
+};
+
 
 
 export default loginUser;
 export { registerUser };
+export{userLocation};

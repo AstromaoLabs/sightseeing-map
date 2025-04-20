@@ -6,6 +6,7 @@ from datetime import timedelta # This is for the JWT token expiration time
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from dotenv import load_dotenv #i'm having problems getting in env
+import certifi
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -48,6 +49,7 @@ CORS_ALLOW_CREDENTIALS = config('CORS_ALLOW_CREDENTIALS', default=True, cast=boo
 CORS_ALLOW_HEADERS = [
     'content-type',
     'x-api-key',
+    'authorization',
 ] # Update by adding to env template when needed
 
 CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000', cast=Csv())
@@ -99,7 +101,7 @@ load_dotenv() #try to load from env
 
 MONGO_URI = os.getenv("MONGO_URI")
 
-client = MongoClient(MONGO_URI)
+client = MongoClient(MONGO_URI, tlsCAFile=certifi.where())
 MONGO_DB = client["sightseeing_maps"] #database_name
 
 

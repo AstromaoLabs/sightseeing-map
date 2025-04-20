@@ -1,7 +1,7 @@
 # **Sightseeing Map**
 
 ## **Overview**
-This project is a collaborative Django + React application designed to help users explore and review local sightseeing spots. The app integrates geolocation to pinpoint the user's current location, displays nearby places of interest, and provides detailed information such as ratings, reviews, opening hours, and pictures. Users can filter spots based on proximity and categories, making it a convenient tool for discovering restaurants, cafes, and attractions nearby.
+This project is a collaborative Django + React application designed to help users especially local users discover and share their favorite sightseeing spots, restaurants and cafes. The app integrates geolocation to pinpoint the user's current location, displays nearby places of interest, and provides detailed information such as ratings, reviews, opening hours, and pictures. We will put effort into reviews. Users can write their very detailed reviews. For example, what they experienced, how the atomosphere looks like, how did you feel and so on including pictures. Users can filter spots based on proximity and categories, making it a convenient tool for discovering restaurants, cafes, and attractions nearby.
 
 ---
 
@@ -35,6 +35,12 @@ This project is a collaborative Django + React application designed to help user
 
 ### **User Reviews**
 - Enables users to submit reviews through a simple form.
+  -  Structure includes:
+  - Pros / Cons
+  - Atmosphere
+  - Service / quality
+  - What did you experienced
+  - rating option
 - Stores reviews in the database via the backend API.
 
 ### **Mobile-Friendly UI**
@@ -51,11 +57,16 @@ This project is a collaborative Django + React application designed to help user
 ---
 
 ## **Technology Stack**
-- **Backend**: Django with Django REST Framework (DRF)
+- **Backend**: Django with Django REST Framework (DRF), python
   - Handles API endpoints for location data, filtering, and spot details.
-- **Frontend**: React
+- **Frontend**: Next.js
   - Displays maps, handles filtering, and manages user interactions.
   - Integrated with backend APIs.
+
+- **Database**: Mongo DB
+ - Get the place information from google place API
+ - CRUD from frontend side
+ - User database
 
 ---
 
@@ -129,9 +140,9 @@ Key highlights:
 
 ## **Collaborators**
 
-- **Frontend Developer**: [Soki Iwae](https://github.com/Sochan2)
+- **Frontend Developer**: [Soki Iwae](https://github.com/Sochan2), [Kim](https://github.com/kyoushiro3)
   - Main responsibilities: Designing and implementing the user interface with React, TailwindCSS, and API integration.
-- **Backend/DevOps Developer**: [Anthony Em](https://github.com/AnSiChen)
+- **Backend/DevOps Developer**: [Anthony Em](https://github.com/AnSiChen), [Kim](https://github.com/kyoushiro3)
   - Main responsibilities: Backend functionality using Django, setting up Google Places API, and managing deployments.
 
 ---
